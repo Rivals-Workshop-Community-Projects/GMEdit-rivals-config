@@ -4,6 +4,10 @@ on:
   repository_dispatch:
     types: [gmedit-plugin-push]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to create revision'
+        required: true
 
 jobs:
   build:
