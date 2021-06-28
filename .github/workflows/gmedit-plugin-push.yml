@@ -1,4 +1,4 @@
-name: GMEdit release
+name: Release
 
 on:
   push:
