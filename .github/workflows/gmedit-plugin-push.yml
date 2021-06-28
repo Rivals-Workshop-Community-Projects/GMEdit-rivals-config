@@ -13,11 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - run: echo "Getting release ${{ github.event.client_payload.tag }}"
     - name: Download GMEdit Plugin
       uses: dsaltares/fetch-gh-release-asset@master
       with:
         repo: "Rivals-Workshop-Community-Projects/rivals-workshop-assistant-gmedit"
-        version: "tags/${{ github.event.client_payload.tag }}"
+        version: "latest"
+        #version: "tags/${{ github.event.client_payload.tag }}"
         file: "rivals-workshop-assistant.zip"
         target: "tmp/gmedit-plugin.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
