@@ -13,11 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+    
     - run: echo "Getting release ${{ github.event.client_payload.tag }}"
     - run: mkdir -p zip
-    - run: mkdir -p release
-    
-   
     - name: Download GMEdit Plugin
       uses: dsaltares/fetch-gh-release-asset@master
       with:
@@ -26,14 +25,13 @@ jobs:
         file: "rivals-workshop-assistant.zip"
         target: "zip/gmedit-plugin.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
-      
     - name: Decompress GMEdit Plugin
       uses: TonyBogdanov/zip@1.0
       with:
           args: unzip -qq ./zip/gmedit-plugin.zip -d ./plugins
 
     # Make release dir
-    - run: mkdir -p release/rivals-workshop-assistant-gmedit
+    - run: mkdir -p release
     # Copy source into release dir
     - run: rsync -a --exclude='.*' --exclude='release' --exclude='zip' . release/gmedit
     - uses: papeloto/action-zip@v1
